@@ -1,0 +1,35 @@
+# AI 무시 목록
+
+## 코드 파일 (분석 제외)
+server.py
+steam_client.py
+config.py
+tools/*.py
+
+## 의존성 및 빌드 산출물
+.venv/
+__pycache__/
+*.pyc
+uv.lock
+
+## git 메타데이터
+.git/
+.gitignore
+
+## 임시 및 시스템 파일
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+## IDE 설정
+.vscode/
+.idea/
+*.sublime-*
+
+## 테스트 파일
+test_*.py
+*_test.py
+tests/ (디렉토리)
