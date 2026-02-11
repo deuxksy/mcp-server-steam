@@ -11,6 +11,10 @@ class Settings(BaseSettings):
         ...,
         description="Steam Web API key from https://steamcommunity.com/dev/apikey"
     )
+    steam_user_id: str | None = Field(
+        default=None,
+        description="Default Steam User ID (64-bit) for API calls"
+    )
     steam_api_base_url: str = Field(
         default="https://api.steampowered.com",
         description="Base URL for Steam Web API"

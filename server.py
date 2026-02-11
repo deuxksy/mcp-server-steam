@@ -230,8 +230,9 @@ async def get_friends_list(
 
 @mcp.tool()
 async def get_owned_games(
-    steam_id: str = Field(
-        description="게임 라이브러리를 조회할 사용자의 64-bit Steam ID입니다."
+    steam_id: str | None = Field(
+        default=None,
+        description="게임 라이브러리를 조회할 사용자의 64-bit Steam ID입니다. 설정하지 않으면 환경변수 STEAM_USER_ID를 사용합니다."
     ),
     include_app_info: bool = Field(
         default=True,
@@ -253,10 +254,16 @@ async def get_owned_games(
     사용 예시: steam_id="76561198000000000", include_app_info=True
     """
     from steam_client import SteamAPIClient
+    from config import settings
+
+    # steam_id가 없으면 환경 변수 사용
+    target_steam_id = steam_id or settings.steam_user_id
+    if not target_steam_id:
+        raise ValueError("steam_id 파라미터가 없고 환경변수 STEAM_USER_ID도 설정되지 않았습니다.")
 
     async with SteamAPIClient() as client:
         params = {
-            "steamid": steam_id,
+            "steamid": target_steam_id,
             "include_appinfo": str(include_app_info).lower(),
             "include_played_free_games": str(include_played_free_games).lower(),
             "format": "json"

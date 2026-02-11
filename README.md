@@ -44,10 +44,21 @@ uv sync
    - 도메인 등록 후 API 키 복사
 
 4. 환경 설정:
+
+**중요**: `.env` 파일에 API 키를 설정해야 합니다.
+
 ```bash
+# .env.example을 복사해서 .env 파일 생성
 cp .env.example .env
-# .env 파일을 열고 STEAM_API_KEY 추가
+
+# .env 파일을 텍스트 편집기로 열어서 STEAM_API_KEY 추가
+# 예: STEAM_API_KEY=YOUR_API_KEY_HERE
+
+# (선택사항) Steam ID를 기본값으로 설정하려면:
+# STEAM_USER_ID=76561198XXXXXXXXXXX
 ```
+
+**API 키 발급**: https://steamcommunity.com/dev/apikey
 
 ## 사용 방법
 
