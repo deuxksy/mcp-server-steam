@@ -33,9 +33,9 @@ git clone <repository-url>
 cd mcp-server-steam/main
 ```
 
-2. Install dependencies:
+2. Install dependencies with uv:
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 3. Get a Steam Web API key:
@@ -54,10 +54,52 @@ cp .env.example .env
 ### Running the Server
 
 ```bash
-python server.py
+uv run python server.py
 ```
 
 The server will start with STDIO transport, suitable for MCP clients like Claude Desktop.
+
+### Claude Desktop Configuration
+
+📖 **자세한 설정 가이드**: [CLAUDE_CONFIG.md](./CLAUDE_CONFIG.md)
+
+#### macOS
+
+Claude Desktop 설정 파일 (`~/Library/Application Support/Claude/claude_desktop_config.json`)에 추가:
+
+```json
+{
+  "mcpServers": {
+    "steam": {
+      "command": "uv",
+      "args": ["run", "python", "/Users/crong/git/mcp-server-steam/main/server.py"],
+      "env": {
+        "STEAM_API_KEY": "your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+#### 환경 변수 사용 (권장)
+
+API 키를 직접 입력하는 대신 환경 변수를 사용하세요:
+
+```bash
+# ~/.zshrc 또는 ~/.zprofile에 추가
+export STEAM_API_KEY="your_steam_api_key_here"
+```
+
+설정에서는:
+```json
+"env": {
+  "STEAM_API_KEY": "${STEAM_API_KEY}"
+}
+```
+
+#### Claude Desktop 재시작
+
+설정을 적용하려면 Claude Desktop을 완전히 종료했다가 다시 시작하세요.
 
 ### MCP Client Configuration
 
@@ -67,8 +109,8 @@ Add to your MCP client configuration:
 {
   "mcpServers": {
     "steam": {
-      "command": "python",
-      "args": ["/path/to/mcp-server-steam/main/server.py"],
+      "command": "uv",
+      "args": ["run", "python", "/path/to/mcp-server-steam/main/server.py"],
       "env": {
         "STEAM_API_KEY": "your_api_key_here"
       }

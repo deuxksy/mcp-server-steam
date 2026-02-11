@@ -1,0 +1,34 @@
+{
+  "mcpServers": {
+    "steam": {
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "server.py"
+      ],
+      "env": {
+        "STEAM_API_KEY": "${STEAM_API_KEY}"
+      },
+      "disabled": false,
+      "alwaysAllow": [
+        "get_user_profile",
+        "get_friends_list",
+        "get_owned_games",
+        "get_recently_played_games",
+        "get_steam_level",
+        "get_player_achievements",
+        "get_game_details",
+        "get_game_news",
+        "get_global_achievement_percentages",
+        "search_games",
+        "get_game_schema",
+        "get_workshop_items",
+        "get_workshop_item_details",
+        "get_user_reviews",
+        "get_player_bans",
+        "resolve_vanity_url"
+      ]
+    }
+  }
+}
