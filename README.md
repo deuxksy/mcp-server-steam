@@ -1,63 +1,63 @@
 # mcp-server-steam
 
-A comprehensive Model Context Protocol (MCP) server for Steam Web API integration using FastMCP 3.0 beta2.
+FastMCP 3.0 beta2를 사용하여 Steam Web API와 통합하는 종합 MCP(Model Context Protocol) 서버입니다.
 
-## Features
+## 주요 기능
 
-- **User Profiles & Stats**
-  - Profile information (persona, avatar, account details)
-  - Friend lists
-  - Owned games library
-  - Playtime data
-  - Recently played games
-  - Steam level
-  - Achievement progress
+- **사용자 프로필 및 통계**
+  - 프로필 정보 (닉네임, 아바타, 계정 상세)
+  - 친구 목록
+  - 소유 게임 라이브러리
+  - 플레이시간 데이터
+  - 최근 플레이한 게임
+  - Steam 레벨
+  - 업적 진행상황
 
-- **Game Info & Store**
-  - Game details and metadata
-  - Store prices and discounts
-  - News and updates
-  - Game search
-  - Achievement data for specific games
+- **게임 정보 및 스토어**
+  - 게임 상세 정보 및 메타데이터
+  - 스토어 가격 및 할인 정보
+  - 뉴스 및 업데이트
+  - 게임 검색
+  - 특정 게임의 업적 데이터
 
-- **Community Features**
-  - Steam Workshop items
-  - User reviews
-  - VAC and game ban status
+- **커뮤니티 기능**
+  - Steam 워크샵 아이템
+  - 사용자 리뷰
+  - VAC 및 게임 밴 상태
 
-## Installation
+## 설치 방법
 
-1. Clone the repository:
+1. 저장소 클론:
 ```bash
 git clone <repository-url>
 cd mcp-server-steam/main
 ```
 
-2. Install dependencies with uv:
+2. uv로 의존성 설치:
 ```bash
 uv sync
 ```
 
-3. Get a Steam Web API key:
-   - Visit https://steamcommunity.com/dev/apikey
-   - Log in with your Steam account
-   - Register your domain and copy the API key
+3. Steam Web API 키 발급:
+   - https://steamcommunity.com/dev/apikey 방문
+   - Steam 계정으로 로그인
+   - 도메인 등록 후 API 키 복사
 
-4. Configure environment:
+4. 환경 설정:
 ```bash
 cp .env.example .env
-# Edit .env and add your STEAM_API_KEY
+# .env 파일을 열고 STEAM_API_KEY 추가
 ```
 
-## Usage
+## 사용 방법
 
-### Running the Server
+### 서버 실행
 
 ```bash
 uv run python server.py
 ```
 
-The server will start with STDIO transport, suitable for MCP clients like Claude Desktop.
+서버가 STDIO 전송 방식으로 시작되며, Claude Desktop 같은 MCP 클라이언트에서 사용할 수 있습니다.
 
 ### Claude Desktop Configuration
 
@@ -101,9 +101,9 @@ export STEAM_API_KEY="your_steam_api_key_here"
 
 설정을 적용하려면 Claude Desktop을 완전히 종료했다가 다시 시작하세요.
 
-### MCP Client Configuration
+### MCP 클라이언트 설정
 
-Add to your MCP client configuration:
+MCP 클라이언트 설정에 추가하세요:
 
 ```json
 {
@@ -119,87 +119,87 @@ Add to your MCP client configuration:
 }
 ```
 
-### Testing with FastMCP CLI
+### FastMCP CLI로 테스트
 
 ```bash
-# List available tools
+# 사용 가능한 도구 목록 보기
 fastmcp list server.py
 
-# Call a tool
+# 도구 호출 테스트
 fastmcp call server.py get_user_profile steam_id=76561198000000000
 ```
 
-## Available Tools
+## 사용 가능한 도구
 
-### Profile Tools
-- `get_user_profile` - Get Steam user profile
-- `get_friends_list` - Get user's friend list
-- `get_owned_games` - Get all owned games
-- `get_recently_played_games` - Get recently played games
-- `get_steam_level` - Get user's Steam level
-- `get_player_achievements` - Get achievement progress for a game
+### 프로필 도구
+- `get_user_profile` - Steam 사용자 프로필 조회
+- `get_friends_list` - 친구 목록 조회
+- `get_owned_games` - 소유한 모든 게임 조회
+- `get_recently_played_games` - 최근 플레이한 게임 조회
+- `get_steam_level` - Steam 레벨 조회
+- `get_player_achievements` - 특정 게임의 업적 진행상황 조회
 
-### Game Tools
-- `get_game_details` - Get game information from store
-- `get_game_news` - Get news and updates for games
-- `get_global_achievement_percentages` - Get global achievement stats
-- `search_games` - Search for games on Steam
-- `get_game_schema` - Get achievement and stats schema
+### 게임 도구
+- `get_game_details` - 스토어에서 게임 정보 조회
+- `get_game_news` - 게임 뉴스 및 업데이트 조회
+- `get_global_achievement_percentages` - 전체 업적 통계 조회
+- `search_games` - Steam에서 게임 검색
+- `get_game_schema` - 업적 및 통계 스키마 조회
 
-### Community Tools
-- `get_workshop_items` - Get Steam Workshop items
-- `get_workshop_item_details` - Get workshop item details
-- `get_user_reviews` - Get user reviews for games
-- `get_player_bans` - Get VAC and game ban status
+### 커뮤니티 도구
+- `get_workshop_items` - Steam 워크샵 아이템 조회
+- `get_workshop_item_details` - 워크샵 아이템 상세 정보
+- `get_user_reviews` - 게임 사용자 리뷰 조회
+- `get_player_bans` - VAC 및 게임 밴 상태 조회
 
-### Utility Tools
-- `resolve_vanity_url` - Convert vanity URL to Steam ID
+### 유틸리티 도구
+- `resolve_vanity_url` - Vanity URL을 Steam ID로 변환
 
-## Resources
+## 리소스
 
-- `steam://config` - Server configuration
-- `steam://supported-games` - Common game App IDs
+- `steam://config` - 서버 설정
+- `steam://supported-games` - 일반적인 게임 App ID 목록
 
-## Steam IDs vs App IDs
+## Steam ID vs App ID
 
-- **Steam ID (SteamID)**: 64-bit user account ID (e.g., 76561198000000000)
-- **App ID (AppID)**: Game identifier on Steam store (e.g., 730 for CS2)
+- **Steam ID (SteamID)**: 64비트 사용자 계정 ID (예: 76561198000000000)
+- **App ID (AppID)**: Steam 스토어에서의 게임 식별자 (예: CS2의 경우 730)
 
-Use `resolve_vanity_url` to convert a custom profile URL to a Steam ID.
+커스텀 프로필 URL을 Steam ID로 변환하려면 `resolve_vanity_url`을 사용하세요.
 
-## Rate Limiting
+## 속도 제한 (Rate Limiting)
 
-The server implements rate limiting to respect Steam API limits:
-- 100 requests per minute
-- Automatic exponential backoff on errors
-- Proper error handling for rate limit responses
+서버는 Steam API 제한을 준수하기 위해 속도 제한을 구현합니다:
+- 분당 100회 요청
+- 오류 발생 시 자동 지수 백오프
+- 속도 제한 응답에 대한 적절한 에러 처리
 
-## Project Structure
+## 프로젝트 구조
 
 ```
 mcp-server-steam/
-├── server.py              # Main entry point
-├── steam_client.py         # Steam API client
-├── config.py              # Configuration
-├── requirements.txt        # Dependencies
-├── README.md              # This file
-├── .env                   # API key (not in git)
-├── .env.example           # Environment template
-└── tools/                 # Tool modules
+├── server.py              # 메인 진입점
+├── steam_client.py         # Steam API 클라이언트
+├── config.py              # 설정
+├── pyproject.toml         # 프로젝트 설정 및 의존성
+├── README.md              # 이 파일
+├── .env                   # API 키 (git에 포함되지 않음)
+├── .env.example           # 환경변수 템플릿
+└── tools/                 # 도구 모듈
     ├── __init__.py
-    ├── profile.py          # User profile tools
-    ├── games.py            # Game info tools
-    └── community.py       # Community tools
+    ├── profile.py          # 사용자 프로필 도구
+    ├── games.py            # 게임 정보 도구
+    └── community.py       # 커뮤니티 도구
 ```
 
-## Error Handling
+## 에러 처리
 
-The server provides clear error messages for:
-- Invalid Steam IDs or App IDs
-- Missing API keys
-- Rate limit exceeded
-- Network errors
-- Steam API errors
+서버는 다음 경우에 명확한 에러 메시지를 제공합니다:
+- 유효하지 않은 Steam ID 또는 App ID
+- API 키 누락
+- 속도 제한 초과
+- 네트워크 오류
+- Steam API 오류
 
 ## AI 사용 예시
 
@@ -253,20 +253,20 @@ AI: get_workshop_item_details로 특정 모드 상세 정보 확인
 3. **오류 처리**: Steam ID가 유효하지 않으면 vanity URL 변환 먼저 시도
 4. **언어 설정**: 한국 사용자를 위한 `language="korean"` 또는 `language="english"` 파라미터 활용
 
-## Contributing
+## 기여
 
-Contributions are welcome! Please feel free to submit issues or pull requests.
+기여를 환영합니다! 이슈나 풀 리퀘스트를 자유롭게 제출해 주세요.
 
-## License
+## 라이선스
 
-MIT License - See LICENSE file for details
+MIT License - 자세한 내용은 LICENSE 파일을 참조하세요
 
-## Resources
+## 참고 자료
 
-- [Steam Web API Documentation](https://steamapi.xpaw.me/)
-- [FastMCP Documentation](https://gofastmcp.com/)
-- [Steam Community Developer Portal](https://steamcommunity.com/dev)
+- [Steam Web API 문서](https://steamapi.xpaw.me/)
+- [FastMCP 문서](https://gofastmcp.com/)
+- [Steam Community 개발자 포털](https://steamcommunity.com/dev)
 
-## Acknowledgments
+## 감사의 말씀
 
-Built with [FastMCP 3.0](https://github.com/jlowin/fastmcp) and [Steam Web API](https://steamcommunity.com/dev).
+[FastMCP 3.0](https://github.com/jlowin/fastmcp)과 [Steam Web API](https://steamcommunity.com/dev)를 사용하여 구현되었습니다.
