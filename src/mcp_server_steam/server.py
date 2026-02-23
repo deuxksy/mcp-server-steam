@@ -161,7 +161,7 @@ get_owned_games, get_friends_list, etc. (프로필 기반 작업)
 
 # Create main server instance
 mcp = FastMCP(
-    name="steam-mcp-server",
+    name="mcp-server-steam",
     instructions=AI_INSTRUCTIONS,
     lifespan=lifespan,
 )
