@@ -1,6 +1,6 @@
 [project]
 name = "mcp-server-steam"
-version = "1.0.4"
+version = "1.0.5"
 description = "MCP Server for Steam Web API integration"
 readme = "README.md"
 requires-python = ">=3.10"

@@ -1,6 +1,6 @@
 """mcp-server-steam - MCP Server for Steam Web API."""
 
-__version__ = "1.0.4"
+__version__ = "1.0.5"
 
 from mcp_server_steam.server import main
 
