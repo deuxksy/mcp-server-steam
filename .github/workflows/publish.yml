@@ -1,0 +1,42 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Build package
+        run: uvx --from hatchling hatch build
+
+      - name: Publish to TestPyPI
+        if: contains(github.ref, '-test')
+        env:
+          TESTPYPI_API_TOKEN: ${{ secrets.TESTPYPI_API_TOKEN }}
+        run: |
+          uvx twine upload --repository testpypi dist/*
+          echo "Published to TestPyPI: https://test.pypi.org/project/mcp-server-steam/"
+
+      - name: Publish to PyPI
+        if: (!contains(github.ref, '-test'))
+        env:
+          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          uvx twine upload dist/*
+          echo "Published to PyPI: https://pypi.org/project/mcp-server-steam/"
