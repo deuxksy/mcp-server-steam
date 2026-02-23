@@ -48,7 +48,7 @@ mcp-server-steam
 1. 저장소 클론:
 ```bash
 git clone <repository-url>
-cd mcp-server-steam/main
+cd mcp-server-steam
 ```
 
 2. uv로 의존성 설치:
@@ -56,7 +56,12 @@ cd mcp-server-steam/main
 uv sync
 ```
 
-3. Steam Web API 키 발급:
+3. 패키지 설치:
+```bash
+uv pip install -e .
+```
+
+4. Steam Web API 키 발급:
    - https://steamcommunity.com/dev/apikey 방문
    - Steam 계정으로 로그인
    - 도메인 등록 후 API 키 복사
@@ -83,7 +88,11 @@ cp .env.example .env
 ### 서버 실행
 
 ```bash
-uv run python server.py
+# PyPI에서 설치한 경우
+mcp-server-steam
+
+# 소스에서 개발 중인 경우
+uv run python -m mcp_server_steam
 ```
 
 서버가 STDIO 전송 방식으로 시작되며, Claude Desktop 같은 MCP 클라이언트에서 사용할 수 있습니다.
@@ -92,18 +101,57 @@ uv run python server.py
 
 📖 **자세한 설정 가이드**: [CLAUDE_CONFIG.md](./CLAUDE_CONFIG.md)
 
-#### macOS
+#### PyPI에서 설치한 경우 (권장)
 
-Claude Desktop 설정 파일 (`~/Library/Application Support/Claude/claude_desktop_config.json`)에 추가:
+Claude Desktop 설정 파일에 추가:
+
+**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+**Windows**: `%APPDATA%/Claude/claude_desktop_config.json`
+**Linux**: `~/.config/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "steam": {
+      "command": "uvx",
+      "args": ["mcp-server-steam"],
+      "env": {
+        "STEAM_API_KEY": "${STEAM_API_KEY}",
+        "STEAM_USER_ID": "${STEAM_USER_ID}"
+      }
+    }
+  }
+}
+```
+
+또는 `pip`으로 설치한 경우:
+
+```json
+{
+  "mcpServers": {
+    "steam": {
+      "command": "mcp-server-steam",
+      "env": {
+        "STEAM_API_KEY": "${STEAM_API_KEY}",
+        "STEAM_USER_ID": "${STEAM_USER_ID}"
+      }
+    }
+  }
+}
+```
+
+#### 소스에서 개발하는 경우
 
 ```json
 {
   "mcpServers": {
     "steam": {
       "command": "uv",
-      "args": ["run", "python", "/Users/crong/git/mcp-server-steam/main/server.py"],
+      "args": ["run", "python", "-m", "mcp_server_steam"],
+      "cwd": "/path/to/mcp-server-steam",
       "env": {
-        "STEAM_API_KEY": "your_api_key_here"
+        "STEAM_API_KEY": "${STEAM_API_KEY}",
+        "STEAM_USER_ID": "${STEAM_USER_ID}"
       }
     }
   }
@@ -132,16 +180,17 @@ export STEAM_API_KEY="your_steam_api_key_here"
 
 ### MCP 클라이언트 설정
 
-MCP 클라이언트 설정에 추가하세요:
+일반적으로는 PyPI 버전을 사용하는 것이 좋습니다:
 
 ```json
 {
   "mcpServers": {
     "steam": {
-      "command": "uv",
-      "args": ["run", "python", "/path/to/mcp-server-steam/main/server.py"],
+      "command": "uvx",
+      "args": ["mcp-server-steam"],
       "env": {
-        "STEAM_API_KEY": "your_api_key_here"
+        "STEAM_API_KEY": "${STEAM_API_KEY}",
+        "STEAM_USER_ID": "${STEAM_USER_ID}"
       }
     }
   }
@@ -152,10 +201,10 @@ MCP 클라이언트 설정에 추가하세요:
 
 ```bash
 # 사용 가능한 도구 목록 보기
-fastmcp list server.py
+uv run fastmcp list src/mcp_server_steam/server.py
 
 # 도구 호출 테스트
-fastmcp call server.py get_user_profile steam_id=76561198000000000
+uv run fastmcp call src/mcp_server_steam/server.py get_user_profile steam_id=76561198000000000
 ```
 
 ## 사용 가능한 도구
@@ -207,18 +256,22 @@ fastmcp call server.py get_user_profile steam_id=76561198000000000
 
 ```
 mcp-server-steam/
-├── server.py              # 메인 진입점
-├── steam_client.py         # Steam API 클라이언트
-├── config.py              # 설정
-├── pyproject.toml         # 프로젝트 설정 및 의존성
-├── README.md              # 이 파일
-├── .env                   # API 키 (git에 포함되지 않음)
-├── .env.example           # 환경변수 템플릿
-└── tools/                 # 도구 모듈
-    ├── __init__.py
-    ├── profile.py          # 사용자 프로필 도구
-    ├── games.py            # 게임 정보 도구
-    └── community.py       # 커뮤니티 도구
+├── src/
+│   └── mcp_server_steam/
+│       ├── __init__.py
+│       ├── __main__.py        # 메인 진입점
+│       ├── server.py          # MCP 서버
+│       ├── steam_client.py    # Steam API 클라이언트
+│       ├── config.py          # 설정
+│       └── tools/             # 도구 모듈
+│           ├── __init__.py
+│           ├── profile.py     # 사용자 프로필 도구
+│           ├── games.py       # 게임 정보 도구
+│           └── community.py   # 커뮤니티 도구
+├── pyproject.toml             # 프로젝트 설정 및 의존성
+├── README.md                  # 이 파일
+├── .env                       # API 키 (git에 포함되지 않음)
+└── .env.example               # 환경변수 템플릿
 ```
 
 ## 에러 처리

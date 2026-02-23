@@ -2,6 +2,41 @@
 
 ## MCP 서버 설정
 
+### 일반 사용자 (PyPI에서 설치)
+
+```json
+{
+  "mcpServers": {
+    "steam": {
+      "command": "uvx",
+      "args": ["mcp-server-steam"],
+      "env": {
+        "STEAM_API_KEY": "${STEAM_API_KEY}",
+        "STEAM_USER_ID": "${STEAM_USER_ID}"
+      }
+    }
+  }
+}
+```
+
+또는 `pip`으로 설치한 경우:
+
+```json
+{
+  "mcpServers": {
+    "steam": {
+      "command": "mcp-server-steam",
+      "env": {
+        "STEAM_API_KEY": "${STEAM_API_KEY}",
+        "STEAM_USER_ID": "${STEAM_USER_ID}"
+      }
+    }
+  }
+}
+```
+
+### 개발자 (로컬 개발 환경)
+
 ```json
 {
   "mcpServers": {
@@ -10,10 +45,13 @@
       "args": [
         "run",
         "python",
-        "/Users/crong/git/mcp-server-steam/main/server.py"
+        "-m",
+        "mcp_server_steam"
       ],
+      "cwd": "/path/to/mcp-server-steam",
       "env": {
-        "STEAM_API_KEY": "${STEAM_API_KEY}"
+        "STEAM_API_KEY": "${STEAM_API_KEY}",
+        "STEAM_USER_ID": "${STEAM_USER_ID}"
       }
     }
   }

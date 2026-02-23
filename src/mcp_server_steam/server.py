@@ -34,7 +34,9 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app):
     """Lifespan context manager for startup/shutdown."""
-    logger.info("Starting mcp-server-steam...")
+    from mcp_server_steam import __version__
+
+    logger.info("Starting mcp-server-steam v%s...", __version__)
 
     # Validate API key on startup
     if not settings.steam_api_key or settings.steam_api_key == "your_steam_api_key_here":
@@ -185,7 +187,7 @@ async def get_user_profile(
 
     사용 예시: steam_id="76561198000000000"
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {"steamids": steam_id}
@@ -215,7 +217,7 @@ async def get_friends_list(
 
     사용 예시: steam_id="76561198000000000", relationship="all"
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -253,7 +255,7 @@ async def get_owned_games(
 
     사용 예시: steam_id="76561198000000000", include_app_info=True
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
     from mcp_server_steam.config import settings
 
     # steam_id가 없으면 환경 변수 사용
@@ -292,7 +294,7 @@ async def get_recently_played_games(
 
     사용 예시: steam_id="76561198000000000", count=10
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -318,7 +320,7 @@ async def get_steam_level(
 
     사용 예시: steam_id="76561198000000000"
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {"steamid": steam_id}
@@ -348,7 +350,7 @@ async def get_player_achievements(
 
     사용 예시: steam_id="76561198000000000", app_id=730, language="english"
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -385,7 +387,7 @@ async def get_game_details(
 
     사용 예시: app_ids=[730, 570, 440], language="english"
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
     import httpx
 
     async with SteamAPIClient() as client:
@@ -426,7 +428,7 @@ async def get_game_news(
 
     사용 예시: app_id=730, count=5, max_length=300
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -454,7 +456,7 @@ async def get_global_achievement_percentages(
 
     사용 예시: app_id=730
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {"gameid": app_id, "l": "english"}
@@ -484,7 +486,7 @@ async def search_games(
 
     사용 예시: query="action", count=25
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
     import httpx
 
     async with SteamAPIClient() as client:
@@ -517,7 +519,7 @@ async def get_game_schema(
 
     사용 예시: app_id=730, language="english"
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -560,7 +562,7 @@ async def get_workshop_items(
 
     사용 예시: app_id=4000(Garry's Mod), query_type=1, page=1, count=30
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -591,7 +593,7 @@ async def get_workshop_item_details(
 
     사용 예시: published_file_ids=[12345678, 87654321]
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -660,7 +662,7 @@ async def get_player_bans(
 
     사용 예시: steam_ids=["76561198000000000", "76561198000000001"]
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -692,7 +694,7 @@ async def resolve_vanity_url(
 
     사용 예시: vanity_url="robinwalker" 또는 vanity_url="customusername"
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {"vanityurl": vanity_url}
