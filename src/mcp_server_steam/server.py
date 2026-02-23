@@ -760,5 +760,10 @@ def get_supported_games() -> str:
 # Main Entry Point
 # ============================================================================
 
-if __name__ == "__main__":
+def main():
+    """Main entry point for mcp-server-steam CLI."""
     mcp.run()
+
+
+if __name__ == "__main__":
+    main()
