@@ -27,7 +27,23 @@ FastMCP 3.0 beta2를 사용하여 Steam Web API와 통합하는 종합 MCP(Model
   - 사용자 리뷰
   - VAC 및 게임 밴 상태
 
-## 설치 방법
+## PyPI에서 설치
+
+PyPI에 게시된 후 다음과 같이 설치할 수 있습니다:
+
+```bash
+pip install mcp-server-steam
+```
+
+설치 후 다음과 같이 실행합니다:
+
+```bash
+mcp-server-steam
+```
+
+## 소스에서 설치
+
+또는 소스 코드에서 직접 설치합니다:
 
 1. 저장소 클론:
 ```bash
