@@ -7,8 +7,8 @@ from pydantic import Field
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
-    steam_api_key: str = Field(
-        ...,
+    steam_api_key: str | None = Field(
+        default=None,
         description="Steam Web API key from https://steamcommunity.com/dev/apikey"
     )
     steam_user_id: str | None = Field(
