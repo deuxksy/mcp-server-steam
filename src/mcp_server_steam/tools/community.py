@@ -31,7 +31,7 @@ async def get_workshop_items(
     Returns:
         List of workshop items with publishedfileid, title, creator, subscriptions, etc.
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -61,7 +61,7 @@ async def get_workshop_item_details(
     Returns:
         List of detailed workshop item information
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -124,7 +124,7 @@ async def get_player_bans(
     Returns:
         List of ban information including VAC bans, game bans, days since last ban
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {

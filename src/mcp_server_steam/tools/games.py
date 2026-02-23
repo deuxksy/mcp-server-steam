@@ -26,7 +26,7 @@ async def get_game_details(
     Returns:
         List of game details including name, developers, publishers, price, genres, etc.
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         # For game details, use store.steampowered.com API
@@ -70,7 +70,7 @@ async def get_game_news(
     Returns:
         List of news items with title, url, date, contents, feed_label
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -95,7 +95,7 @@ async def get_global_achievement_percentages(
     Returns:
         List of achievements with percentage of players who unlocked each
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {"gameid": app_id, "l": "english"}
@@ -121,7 +121,7 @@ async def search_games(
     Returns:
         List of matching games with app_id, name, release_date, price
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         # Use store search API
@@ -152,7 +152,7 @@ async def get_game_schema(
     Returns:
         Game schema with achievements, stats, and available stats
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {

@@ -20,7 +20,7 @@ async def get_user_profile(
     Returns:
         User profile dictionary with persona, avatar URLs, account state, etc.
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {"steamids": steam_id}
@@ -48,7 +48,7 @@ async def get_friends_list(
     Returns:
         List of friends with Steam ID, relationship, and friend_since timestamp
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -82,7 +82,7 @@ async def get_owned_games(
     Returns:
         List of owned games with appid, playtime_forever, last_played, etc.
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -113,7 +113,7 @@ async def get_recently_played_games(
     Returns:
         List of recently played games with appid, name, playtime_2weeks, playtime_forever
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
@@ -137,7 +137,7 @@ async def get_steam_level(
     Returns:
         Dictionary with player_level field
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {"steamid": steam_id}
@@ -164,7 +164,7 @@ async def get_player_achievements(
     Returns:
         List of achievements with achieved status, unlock time, name, description
     """
-    from steam_client import SteamAPIClient
+    from mcp_server_steam.steam_client import SteamAPIClient
 
     async with SteamAPIClient() as client:
         params = {
