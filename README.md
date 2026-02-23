@@ -270,16 +270,12 @@ AI: get_workshop_item_details로 특정 모드 상세 정보 확인
 
 기여를 환영합니다! 이슈나 풀 리퀘스트를 자유롭게 제출해 주세요.
 
-## 라이선스
-
-MIT License - 자세한 내용은 LICENSE 파일을 참조하세요
-
 ## 참고 자료
 
 - [Steam Web API 문서](https://steamapi.xpaw.me/)
 - [FastMCP 문서](https://gofastmcp.com/)
 - [Steam Community 개발자 포털](https://steamcommunity.com/dev)
 
-## 감사의 말씀
+## 라이선스
 
-[FastMCP 3.0](https://github.com/jlowin/fastmcp)과 [Steam Web API](https://steamcommunity.com/dev)를 사용하여 구현되었습니다.
+MIT License - 자세한 내용은 LICENSE 파일을 참조하세요
