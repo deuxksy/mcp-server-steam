@@ -55,3 +55,21 @@ include = [
 
 [dependency-groups]
 dev = []
+
+[tool.pylint.messages_control]
+disable = [
+    "C0111", # missing-docstring (TODO: 문서화 진행 중)
+    "C0103", # invalid-name (TODO: 명명 규칙 조정 후 제거)
+    "R0903", # too-few-public-methods
+]
+
+max-line-length = 100
+
+[tool.pylint.typecheck]
+ignored-modules = ["fastmcp"]
+
+[tool.pylint.per-file-ignores]
+"tests/*" = [
+    "missing-docstring",
+    "invalid-name",
+]
