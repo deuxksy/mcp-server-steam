@@ -1,5 +1,7 @@
 # mcp-server-steam
 
+> **AI** 를 활용해 생성된 프로젝트입니다.
+
 FastMCP 3.0 beta2를 사용하여 Steam Web API와 통합하는 종합 MCP(Model Context Protocol) 서버입니다.
 
 ## 주요 기능
