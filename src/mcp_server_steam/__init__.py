@@ -2,7 +2,6 @@
 
 __version__ = "1.0.0"
 
-# Import will be added after server.py is moved
-# from mcp_server_steam.server import main
+from mcp_server_steam.server import main
 
-__all__ = ["__version__"]
+__all__ = ["main", "__version__"]
